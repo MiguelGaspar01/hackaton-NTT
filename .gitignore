@@ -1,0 +1,20 @@
+# Models
+models/
+
+# Data (optional — if large)
+data/
+
+# Python
+__pycache__/
+*.pyc
+
+# Notebooks checkpoints
+.ipynb_checkpoints/
+
+# Virtual env
+.venv/
+env/
+
+# OS
+.DS_Store
+Thumbs.db
