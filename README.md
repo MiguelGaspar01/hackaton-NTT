@@ -41,3 +41,9 @@ Para garantir o correto fluxo de trabalho, os ficheiros devem ser executados pel
 - Foram adicionados alguns ficheiros ao `.gitignore`  
 - Os ficheiros de dados deixam de ser adicionados ao repositório  
 - Esta decisão foi tomada porque o repositório estava a exceder o limite de espaço online
+
+
+
+## Morning Routine Mix
+
+https://youtu.be/8B4soa7z098 
