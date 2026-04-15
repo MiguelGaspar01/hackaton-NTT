@@ -11,7 +11,6 @@ End-to-end ML workflow to predict whether a client subscribes to a term deposit 
 | 3 | `FeatureSelection.ipynb` | Correlation analysis + embedded feature selection | `data/X_train_selected.csv`, `data/X_test_selected.csv`, `data/y_train.csv`, `data/y_test.csv` |
 | 4 | `Modelling.ipynb` | Baseline training, 5-fold CV, operating-point policy definition | `models/*.joblib`, `models/model_operating_points.csv`, `models/model_selection_rate_validation_metrics.csv` |
 | 5 | `Evaluation.ipynb` | Frozen-threshold evaluation on test set, reports, SHAP | `data/test_set_predictions.csv`, `data/test_set_final_metrics_frozen_policy.csv` |
-| 6 | `Deployment.ipynb` | Full preprocessing + feature selection + model training pipeline for production | `models/deployment/*` artifacts |
 
 ## Data and Preprocessing Summary
 
@@ -19,15 +18,15 @@ End-to-end ML workflow to predict whether a client subscribes to a term deposit 
 - Train/test split: `36,168 / 9,043`
 - Target is imbalanced; undersampling is applied on train only.
 - Main preprocessing steps:
-1. Drop low-value columns
-2. `log1p` transform on `previous`
-3. Cyclical encoding for `month` and `day` (`sin/cos`)
-4. Numeric scaling (`StandardScaler` + `MinMaxScaler`)
-5. Unknown categories converted to missing
-6. Outlier treatment with z-score percentile cutoff
-7. Imputation (`KNNImputer` for numeric, `SimpleImputer` for categorical)
-8. One-hot encoding (`drop='first'`)
-9. `InstanceHardnessThreshold` undersampling
+
+1. `log1p` transform on `previous`
+2. Cyclical encoding for `month` and `day` (`sin/cos`)
+3. Numeric scaling (`StandardScaler` + `MinMaxScaler`)
+4. Unknown categories converted to missing
+5. Outlier treatment with z-score percentile cutoff
+6. Imputation (`KNNImputer` for numeric, `SimpleImputer` for categorical)
+7. One-hot encoding (`drop='first'`)
+8. Undersampling
 
 After preprocessing/undersampling:
 - Train shape: `13,423 x 30`
@@ -70,22 +69,6 @@ Instead of using a fixed `0.5` threshold, thresholds were frozen from validation
 | CatBoost | 0.30 | 0.3199 | 0.2232 | 0.7647 | 0.3456 | 0.7842 |
 
 Key takeaway: the project emphasizes threshold policy and lift trade-offs, not only default-threshold accuracy.
-
-
-## Repository Structure
-
-```text
-.
-├─ EDA.ipynb
-├─ Preprocessment.ipynb
-├─ FeatureSelection.ipynb
-├─ Modelling.ipynb
-├─ Evaluation.ipynb
-├─ Deployment.ipynb
-├─ thresholding.py
-├─ main.py
-└─ pyproject.toml
-```
 
 ## How To Run
 
